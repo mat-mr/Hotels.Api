@@ -2,6 +2,6 @@
 {
     public class HotelsResponse
     {
-        public required IEnumerable<HotelResponse> Rooms { get; init; } = Enumerable.Empty<HotelResponse>();
+        public required IEnumerable<HotelResponse> Items { get; init; } = Enumerable.Empty<HotelResponse>();
     }
 }
