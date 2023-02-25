@@ -9,7 +9,7 @@ namespace Hotels.Api.Mapping
         {
             return new HotelDto
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.NewGuid(), 
                 Name = request.Name,
                 Category = request.Category,
                 IncludesTransfers = request.IncludesTransfers,
