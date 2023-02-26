@@ -8,7 +8,7 @@ public class ApiEndpoints
     {
         private const string Base = $"{ApiBase}/hotels";
 
-        public const string Get = $"{Base}/{{id}}";
+        public const string Get = $"{Base}/{{idOrSlug}}";
 
         public const string GetAll = Base;
 

@@ -1,13 +1,18 @@
-﻿using Hotels.Data.Repositores;
+﻿using Hotels.Data.Database;
+using Hotels.Data.Repositores;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Hotels.Data
 {
     public static class DataServiceCollectionExtensions
     {
-        public static IServiceCollection AddData(this IServiceCollection services)
+        public static IServiceCollection AddDataBase(this IServiceCollection services, string connectionString)
         {
+            services.AddSingleton<IDbConnectionFactory>(_ => new MsSqlConnection(connectionString));
+
             services.AddSingleton<IHotelRepository, HotelRepository>();
+
+            services.AddSingleton<DbInitializer>();
 
             return services;
         }

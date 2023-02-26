@@ -14,6 +14,12 @@ namespace Hotels.Data.Repositores
             return hotel;
         }
 
+        public async Task<HotelDto?> GetBySlugAsync(string slug, CancellationToken token)
+        {
+            var hotel = _hotels.FirstOrDefault(h => h.Slug == slug);
+            return hotel;
+        }
+
         public async Task<IEnumerable<HotelDto>> GetAllAsync(CancellationToken token)
         {
             return _hotels;

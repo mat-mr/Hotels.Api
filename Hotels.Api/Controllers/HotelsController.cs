@@ -22,7 +22,7 @@ namespace Hotels.Api.Controllers
 
             var created = await _hotelRepository.CreateAsync(hotel, token);  
 
-            return CreatedAtAction(nameof(Get), new { id = hotel.Id }, hotel);
+            return CreatedAtAction(nameof(Get), new { idOrSlug = hotel.Id }, hotel);
         }
 
         [HttpPut(ApiEndpoints.Hotels.Update)]
@@ -52,9 +52,12 @@ namespace Hotels.Api.Controllers
         }
 
         [HttpGet(ApiEndpoints.Hotels.Get)]
-        public async Task<IActionResult> Get([FromRoute] Guid id, CancellationToken token)
+        public async Task<IActionResult> Get([FromRoute] string idOrSlug, CancellationToken token)
         {
-            var hotel = await _hotelRepository.GetByIdAsync(id, token);
+            var hotel = Guid.TryParse(idOrSlug, out var id)
+                ? await _hotelRepository.GetByIdAsync(id, token)
+                : await _hotelRepository.GetBySlugAsync(idOrSlug, token);
+            
             if (hotel == null)
             {
                 return NotFound();

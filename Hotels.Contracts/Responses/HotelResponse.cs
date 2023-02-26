@@ -11,5 +11,7 @@
         public required bool IncludesTransfers { get; init; }
 
         public required IEnumerable<string> Rooms { get; init; } = Enumerable.Empty<string>();
+
+        public required string Slug { get; init; }
     }
 }

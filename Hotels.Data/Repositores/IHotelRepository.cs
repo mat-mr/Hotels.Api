@@ -6,6 +6,8 @@ namespace Hotels.Data.Repositores
     {
         Task<HotelDto?> GetByIdAsync(Guid hotelId, CancellationToken token);
 
+        Task<HotelDto?> GetBySlugAsync(string slug, CancellationToken token);
+
         Task<IEnumerable<HotelDto>> GetAllAsync(CancellationToken token);
 
         Task<bool> CreateAsync(HotelDto hotel, CancellationToken token);

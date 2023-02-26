@@ -36,6 +36,7 @@ namespace Hotels.Api.Mapping
                 Category = hotel.Category,
                 IncludesTransfers = hotel.IncludesTransfers,
                 Rooms = hotel.Rooms,
+                Slug = hotel.Slug
             };
         }
 
