@@ -8,7 +8,8 @@ var config = builder.Configuration;
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddDataBase(config["ConnectionStrings:SqlConnection"]!);
+builder.Services.AddDataLayer(config["ConnectionStrings:SqlConnection"]!);
+builder.Services.AddServiceLayer();
 
 var app = builder.Build();
 

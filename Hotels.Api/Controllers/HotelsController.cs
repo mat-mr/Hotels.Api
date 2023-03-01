@@ -1,6 +1,6 @@
 ﻿using Hotels.Api.Mapping;
 using Hotels.Contracts.Requests;
-using Hotels.Data.Repositores;
+using Hotels.Services.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hotels.Api.Controllers
@@ -8,68 +8,66 @@ namespace Hotels.Api.Controllers
     [ApiController]
     public class HotelsController : ControllerBase
     {
-        private readonly IHotelRepository _hotelRepository;
+        private readonly IHotelService _hotelService;
 
-        public HotelsController(IHotelRepository hotelRepository)
+        public HotelsController(IHotelService hotelService)
         {
-            _hotelRepository = hotelRepository;
+            _hotelService = hotelService;
         }
 
         [HttpPost(ApiEndpoints.Hotels.Create)]
         public async Task<IActionResult> Create([FromBody] CreateHotelRequest request, CancellationToken token)
         {
             var hotel = request.MapToHotel();
+            var createResult = await _hotelService.CreateAsync(hotel, token);
 
-            var created = await _hotelRepository.CreateAsync(hotel, token);  
-
-            return CreatedAtAction(nameof(Get), new { idOrSlug = hotel.Id }, hotel);
+            return createResult.Match<IActionResult>(
+                success => CreatedAtAction(nameof(Get), new { idOrSlug = hotel.Id }, hotel),
+                failure => BadRequest(failure.Errors)
+                );
         }
 
         [HttpPut(ApiEndpoints.Hotels.Update)]
-        public async Task<IActionResult> Create([FromRoute] Guid id, [FromBody] UpdateHotelRequest request, CancellationToken token)
+        public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateHotelRequest request, CancellationToken token)
         {
             var hotel = request.MapToHotel(id);
-
-            var updated = await _hotelRepository.UpdateAsync(hotel, token);
-            if (!updated)
-            {
-                return NotFound();
-            }
-
-            return Ok(hotel.MapToResponse());
+            var updateResult = await _hotelService.UpdateAsync(hotel, token);
+            
+            return updateResult.Match<IActionResult>(
+                hotel => Ok(hotel.MapToResponse()),
+                notFound => NotFound(),
+                failure => BadRequest(failure.Errors)
+                );
         }
 
         [HttpDelete(ApiEndpoints.Hotels.Delete)]
         public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken token)
         {
-            var deleted = await _hotelRepository.DeleteByIdAsync(id, token);
-            if (!deleted)
-            {
-                return NotFound();
-            }
+            var deleteResult = await _hotelService.DeleteByIdAsync(id, token);
 
-            return Ok();
+            return deleteResult.Match<IActionResult>(
+                success => Ok(),
+                notFound => NotFound()
+                );
         }
 
         [HttpGet(ApiEndpoints.Hotels.Get)]
         public async Task<IActionResult> Get([FromRoute] string idOrSlug, CancellationToken token)
         {
-            var hotel = Guid.TryParse(idOrSlug, out var id)
-                ? await _hotelRepository.GetByIdAsync(id, token)
-                : await _hotelRepository.GetBySlugAsync(idOrSlug, token);
-            
-            if (hotel == null)
-            {
-                return NotFound();
-            }
+            var getResult = Guid.TryParse(idOrSlug, out var id)
+                ? await _hotelService.GetByIdAsync(id, token)
+                : await _hotelService.GetBySlugAsync(idOrSlug, token);
 
-            return Ok(hotel.MapToResponse());
+            return getResult.Match<IActionResult>(
+                hotel => Ok(hotel.MapToResponse()),
+                notFound => NotFound()
+                );
         }
 
         [HttpGet(ApiEndpoints.Hotels.GetAll)]
         public async Task<IActionResult> GetAll(CancellationToken token)
         {
-            var hotels = await _hotelRepository.GetAllAsync(token);
+            var hotels = await _hotelService.GetAllAsync(token);
             
             return Ok(hotels.MapToResponse());
         }

@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.5.1" />
+    <PackageReference Include="OneOf" Version="3.0.223" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hotels.Contracts\Hotels.Contracts.csproj" />
+    <ProjectReference Include="..\Hotels.Data\Hotels.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Validators\NewFolder\" />
+  </ItemGroup>
+
+</Project>

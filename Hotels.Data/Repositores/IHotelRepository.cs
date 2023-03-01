@@ -4,7 +4,7 @@ namespace Hotels.Data.Repositores
 {
     public interface IHotelRepository
     {
-        Task<HotelDto?> GetByIdAsync(Guid hotelId, CancellationToken token);
+        Task<HotelDto?> GetByIdAsync(Guid id, CancellationToken token);
 
         Task<HotelDto?> GetBySlugAsync(string slug, CancellationToken token);
 
@@ -14,6 +14,8 @@ namespace Hotels.Data.Repositores
 
         Task<bool> UpdateAsync(HotelDto hotel, CancellationToken token);
 
-        Task<bool> DeleteByIdAsync(Guid hotelId, CancellationToken token);
+        Task<bool> DeleteByIdAsync(Guid id, CancellationToken token);
+
+        Task<bool> ExistsByIdAsync(Guid id, CancellationToken token);
     }
 }

@@ -6,7 +6,7 @@ namespace Hotels.Data
 {
     public static class DataServiceCollectionExtensions
     {
-        public static IServiceCollection AddDataBase(this IServiceCollection services, string connectionString)
+        public static IServiceCollection AddDataLayer(this IServiceCollection services, string connectionString)
         {
             services.AddSingleton<IDbConnectionFactory>(_ => new MsSqlConnection(connectionString));
 

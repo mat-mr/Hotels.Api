@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33403.182
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotels.Api", "Hotels.Api\Hotels.Api.csproj", "{D0CEA1B6-800E-4E19-ABE7-4342FE3209EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hotels.Api", "Hotels.Api\Hotels.Api.csproj", "{D0CEA1B6-800E-4E19-ABE7-4342FE3209EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotels.Domain", "Hotels.Domain\Hotels.Domain.csproj", "{05A2DA9D-0509-4E4C-93B5-46CE3FDA53E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hotels.Services", "Hotels.Domain\Hotels.Services.csproj", "{05A2DA9D-0509-4E4C-93B5-46CE3FDA53E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotels.Contracts", "Hotels.Contracts\Hotels.Contracts.csproj", "{6982BA8D-0FAE-4323-A046-6499DAE8CA46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hotels.Contracts", "Hotels.Contracts\Hotels.Contracts.csproj", "{6982BA8D-0FAE-4323-A046-6499DAE8CA46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotels.Data", "Hotels.Data\Hotels.Data.csproj", "{0C4B238B-D01B-488B-9977-6F89F70EAEBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hotels.Data", "Hotels.Data\Hotels.Data.csproj", "{0C4B238B-D01B-488B-9977-6F89F70EAEBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
