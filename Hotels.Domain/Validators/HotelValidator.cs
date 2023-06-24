@@ -2,32 +2,32 @@
 using Hotels.Data.Models;
 using Hotels.Data.Repositores;
 
-namespace Hotels.Services.Validators
+namespace Hotels.Services.Validators;
+
+public class HotelValidator : AbstractValidator<HotelDto>
 {
-    public class HotelValidator : AbstractValidator<HotelDto>
+    private readonly IHotelRepository _hotelRepository;
+
+    public HotelValidator(IHotelRepository hotelRepository)
     {
-        private readonly IHotelRepository _hotelRepository;
+        RuleFor(x => x.Id)
+            .NotEmpty();
+        
+        RuleFor(x => x.Name)
+            .NotEmpty()
+            .MustAsync(IsNameValid);
 
-        public HotelValidator(IHotelRepository hotelRepository)
-        {
-            RuleFor(x => x.Id)
-                .NotEmpty();
-            
-            RuleFor(x => x.Name)
-                .NotEmpty()
-                .MustAsync(ValidateName);
+        RuleFor(x => x.Category)
+            .NotEmpty();
 
-            RuleFor(x => x.Category)
-                .NotEmpty();
+        _hotelRepository = hotelRepository;
+    }
 
-            _hotelRepository = hotelRepository;
-        }
+    private async Task<bool> IsNameValid(HotelDto hotel, string name, CancellationToken token)
+    {
+        var hotelWithSameName = await _hotelRepository.GetByNameAsync(name, token);
 
-        private Task<bool> ValidateName(HotelDto hotel, string name, CancellationToken token)
-        {
-            // check if one with same name exists
-
-            return Task.FromResult(true);
-        }
+        return hotelWithSameName is null 
+            || hotelWithSameName.Id == hotel.Id;
     }
 }

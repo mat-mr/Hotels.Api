@@ -1,28 +1,27 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 
-namespace Hotels.Data.Database
+namespace Hotels.Data.Database;
+
+public interface IDbConnectionFactory
 {
-    public interface IDbConnectionFactory
+    Task<IDbConnection> CreateAsync();
+}
+
+public class MsSqlConnection : IDbConnectionFactory
+{
+    private readonly string _connectionString;
+
+    public MsSqlConnection(string connectionString)
     {
-        Task<IDbConnection> CreateAsync();
+        _connectionString = connectionString;
     }
 
-    public class MsSqlConnection : IDbConnectionFactory
+    public async Task<IDbConnection> CreateAsync()
     {
-        private readonly string _connectionString;
+        var connection = new SqlConnection(_connectionString);
+        await connection.OpenAsync();
 
-        public MsSqlConnection(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
-
-        public async Task<IDbConnection> CreateAsync()
-        {
-            var connection = new SqlConnection(_connectionString);
-            await connection.OpenAsync();
-
-            return connection;
-        }
+        return connection;
     }
 }

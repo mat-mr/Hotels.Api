@@ -1,5 +1,6 @@
 using Hotels.Data;
 using Hotels.Data.Database;
+using Hotels.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

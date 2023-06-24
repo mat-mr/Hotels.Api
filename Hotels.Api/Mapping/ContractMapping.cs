@@ -1,51 +1,50 @@
-﻿using Hotels.Contracts.Requests;
+﻿using Hotels.Contracts.Responses;
 using Hotels.Data.Models;
 
-namespace Hotels.Api.Mapping
+namespace Hotels.Api.Mapping;
+
+public static class ContractMapping
 {
-    public static class ContractMapping
+    public static HotelDto MapToHotel(this CreateHotelRequest request)
     {
-        public static HotelDto MapToHotel(this CreateHotelRequest request)
+        return new HotelDto
         {
-            return new HotelDto
-            {
-                Id = Guid.NewGuid(), 
-                Name = request.Name,
-                Category = request.Category,
-                IncludesTransfers = request.IncludesTransfers,
-            };
-        }
+            Id = Guid.NewGuid(), 
+            Name = request.Name,
+            Category = request.Category,
+            IncludesTransfers = request.IncludesTransfers,
+        };
+    }
 
-        public static HotelDto MapToHotel(this UpdateHotelRequest request, Guid hotelId)
+    public static HotelDto MapToHotel(this UpdateHotelRequest request, Guid hotelId)
+    {
+        return new HotelDto
         {
-            return new HotelDto
-            {
-                Id = hotelId,
-                Name = request.Name,
-                Category = request.Category,
-                IncludesTransfers = request.IncludesTransfers,
-            };
-        }
+            Id = hotelId,
+            Name = request.Name,
+            Category = request.Category,
+            IncludesTransfers = request.IncludesTransfers,
+        };
+    }
 
-        public static HotelResponse MapToResponse(this HotelDto hotel)
+    public static HotelResponse MapToResponse(this HotelDto hotel)
+    {
+        return new HotelResponse
         {
-            return new HotelResponse
-            {
-                Id = hotel.Id,
-                Name = hotel.Name,
-                Category = hotel.Category,
-                IncludesTransfers = hotel.IncludesTransfers,
-                Rooms = hotel.Rooms,
-                Slug = hotel.Slug
-            };
-        }
+            Id = hotel.Id,
+            Name = hotel.Name,
+            Category = hotel.Category,
+            IncludesTransfers = hotel.IncludesTransfers,
+            Rooms = hotel.Rooms,
+            Slug = hotel.Slug
+        };
+    }
 
-        public static HotelsResponse MapToResponse(this IEnumerable<HotelDto> hotels)
+    public static HotelsResponse MapToResponse(this IEnumerable<HotelDto> hotels)
+    {
+        return new HotelsResponse
         {
-            return new HotelsResponse
-            {
-                Items = hotels.Select(MapToResponse)
-            };
-        }
+            Items = hotels.Select(MapToResponse)
+        };
     }
 }

@@ -16,8 +16,4 @@
     <ProjectReference Include="..\Hotels.Data\Hotels.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Validators\NewFolder\" />
-  </ItemGroup>
-
 </Project>

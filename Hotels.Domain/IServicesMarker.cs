@@ -1,6 +1,5 @@
-﻿namespace Hotels.Services
+﻿namespace Hotels.Services;
+
+public interface IServicesMarker
 {
-    public class IServicesMarker
-    {
-    }
 }
