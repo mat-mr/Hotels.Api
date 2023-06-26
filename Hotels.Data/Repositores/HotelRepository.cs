@@ -62,13 +62,21 @@ public class HotelRepository : IHotelRepository
         return MapHotel(result);
     }
 
-    public async Task<IEnumerable<HotelDto>> GetAllAsync(CancellationToken token)
+    public async Task<IEnumerable<HotelDto>> GetAllAsync(GetAllHotelsOptions options, CancellationToken token)
     {
         using var connection = await _dbConnectionFactory.CreateAsync();
 
-        var result = await connection.QueryAsync(new CommandDefinition("""
+        var result = await connection.QueryAsync(new CommandDefinition($"""
                 select * from hotels
-                """, cancellationToken: token));
+                where (@name is null or name like @name)
+                and (@category is null or category like @category)
+                and (@includesTransfers is null or includesTransfers = @includesTransfers)
+                """, 
+                new { 
+                    name = options.Name is null ? null : $"%{options.Name}%", 
+                    category = options.Category is null ? null : $"%{options.Category}%", 
+                    includesTransfers = options.IncludesTransfers is null ? null : options.IncludesTransfers},
+                cancellationToken: token));
 
         return result.Select(MapHotel);
     }

@@ -10,7 +10,7 @@ public interface IHotelRepository
 
     Task<HotelDto?> GetByNameAsync(string name, CancellationToken token);
 
-    Task<IEnumerable<HotelDto>> GetAllAsync(CancellationToken token);
+    Task<IEnumerable<HotelDto>> GetAllAsync(GetAllHotelsOptions options, CancellationToken token);
 
     Task<bool> CreateAsync(HotelDto hotel, CancellationToken token);
 

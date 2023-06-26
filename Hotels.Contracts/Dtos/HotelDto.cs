@@ -3,7 +3,7 @@
 namespace Hotels.Data.Models;
 
 public partial class HotelDto
-{
+{ 
     public required Guid Id { get; init; }
 
     public required string Name { get; set; }

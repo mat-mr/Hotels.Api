@@ -1,4 +1,5 @@
 ﻿using Hotels.Api.Mapping;
+using Hotels.Contracts.Requests;
 using Hotels.Contracts.Responses;
 using Hotels.Services.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -65,9 +66,10 @@ public class HotelsController : ControllerBase
     }
 
     [HttpGet(ApiEndpoints.Hotels.GetAll)]
-    public async Task<IActionResult> GetAll(CancellationToken token)
+    public async Task<IActionResult> GetAll([FromQuery] GetAllHotelsRequest request, CancellationToken token)
     {
-        var hotels = await _hotelService.GetAllAsync(token);
+        var options = request.MapToOptions();
+        var hotels = await _hotelService.GetAllAsync(options, token);
         
         return Ok(hotels.MapToResponse());
     }

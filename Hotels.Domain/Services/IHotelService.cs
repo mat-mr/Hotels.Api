@@ -11,7 +11,7 @@ public interface IHotelService
 
     Task<OneOf<HotelDto, NotFound>> GetBySlugAsync(string slug, CancellationToken token);
 
-    Task<IEnumerable<HotelDto>> GetAllAsync(CancellationToken token);
+    Task<IEnumerable<HotelDto>> GetAllAsync(GetAllHotelsOptions options, CancellationToken token);
 
     Task<OneOf<Success, ValidationErrors>> CreateAsync(HotelDto hotel, CancellationToken token);
 

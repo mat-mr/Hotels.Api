@@ -11,6 +11,7 @@ public class HotelService : IHotelService
 {
     private readonly IHotelRepository _hotelRepository;
     private readonly IValidator<HotelDto> _hotelValidator;
+    private readonly IValidator<GetAllHotelsOptions> _hotelOptionsValidator;
 
     public HotelService(IHotelRepository hotelRepository, IValidator<HotelDto> hotelValidator)
     {
@@ -38,13 +39,18 @@ public class HotelService : IHotelService
         {
             return new NotFound();
         }
-
         return hotel;
     }
 
-    public async Task<IEnumerable<HotelDto>> GetAllAsync(CancellationToken token)
+    public async Task<IEnumerable<HotelDto>> GetAllAsync(GetAllHotelsOptions options, CancellationToken token)
     {
-        return await _hotelRepository.GetAllAsync(token);
+        //var validationResult = await _hotelOptionsValidator.ValidateAsync(options, token);
+        //if (!validationResult.IsValid)
+        //{
+        //    return new ValidationErrors(validationResult.Errors);
+        //}
+
+        return await _hotelRepository.GetAllAsync(options, token);
     }
 
     public async Task<OneOf<Success, ValidationErrors>> CreateAsync(HotelDto hotel, CancellationToken token)
