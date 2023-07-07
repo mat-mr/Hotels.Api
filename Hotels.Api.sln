@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33403.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hotels.Api", "Hotels.Api\Hotels.Api.csproj", "{D0CEA1B6-800E-4E19-ABE7-4342FE3209EB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hotels.Services", "Hotels.Domain\Hotels.Services.csproj", "{05A2DA9D-0509-4E4C-93B5-46CE3FDA53E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hotels.Domain", "Hotels.Domain\Hotels.Domain.csproj", "{05A2DA9D-0509-4E4C-93B5-46CE3FDA53E4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hotels.Contracts", "Hotels.Contracts\Hotels.Contracts.csproj", "{6982BA8D-0FAE-4323-A046-6499DAE8CA46}"
 EndProject
@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hotels.Data", "Hotels.Data\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{ED9F8FE0-FC69-429D-BE9D-9705569BA1D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotel.Services.Tests", "Hotel.Services.Tests\Hotel.Services.Tests.csproj", "{7DE5D28E-C85C-448C-A163-FAF6E0D2D72F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hotel.Services.Tests", "Hotel.Services.Tests\Hotel.Services.Tests.csproj", "{7DE5D28E-C85C-448C-A163-FAF6E0D2D72F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

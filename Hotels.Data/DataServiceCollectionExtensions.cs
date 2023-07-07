@@ -8,7 +8,7 @@ public static class DataServiceCollectionExtensions
 {
     public static IServiceCollection AddDataLayer(this IServiceCollection services, string connectionString)
     {
-        services.AddSingleton<IDbConnectionFactory>(_ => new MsSqlConnection(connectionString));
+        services.AddSingleton<IDbConnectionFactory>(_ => new DbConnectionFactory(connectionString));
 
         services.AddSingleton<IHotelRepository, HotelRepository>();
 
